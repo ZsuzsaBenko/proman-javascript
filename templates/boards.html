@@ -1,72 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ProMan</title>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>ProMan</title>
 
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
-          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-          crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.css">
-    <script id="main-script" type='module' src="static/js/main.js?v=2.1" defer></script>
-{#    <script type='module' src="{{ url_for('static', filename='js/main.js') }}" defer></script>#}
-    <script type='module' src="{{ url_for('static', filename='js/jquery.js') }}" defer></script>
-    <script type='module' src="{{ url_for('static', filename='js/popper.js') }}" defer></script>
-    <script type='module' src="{{ url_for('static', filename='js/bootstrap.min.js') }}" defer></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js' defer></script>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
-    <link rel="shortcut icon" href="#">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
-</head>
-<body>
-<nav>
-    <span>Proman</span>
-    {% if session["username"] %}
-        <button id="new-board-button">Add Public Board</button>
-        <button id="new-private-board-button">Add Private Board</button>
-        <button type="button" id="logout" class="">Logout</button>
-    {% else %}
-    <!-- Button trigger modal -->
-        <button type="button" id="registration" class=""  data-toggle="modal" data-target="#modal">
-            Registration
-        </button>
-        <button type="button" id="login" class=""  data-toggle="modal" data-target="#modal">
-            Login
-        </button>
-    {% endif %}
-</nav>
-<main id="full-content">
-</main>
-<footer>
-    <p>© Copyright - Backend Boys</p>
-</footer>
-
-<!-- Modal -->
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-title"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modal-title"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span id="close-x" aria-hidden="true">&times;</span>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-grid.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-reboot.min.css') }}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+              integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
+        <link rel="shortcut icon" href="#">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main.css') }}">
+        <script src="{{ url_for('static', filename='js/jquery.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='js/popper.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}" defer></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.min.js' defer></script>
+        <script id="main-script" type='module' src="/static/js/main.js?v=2.3" defer></script>
+    </head>
+    <body>
+        <nav>
+            <span>Proman</span>
+            {% if logged_in %}
+                <button id="new-board-button">Add Public Board</button>
+                <button id="new-private-board-button">Add Private Board</button>
+                <button type="button" id="logout" class="">Logout</button>
+            {% else %}
+                <button type="button" id="registration" data-toggle="modal" data-target="#modal">
+                    Registration
                 </button>
-            </div>
-            <div id="modal-body" class="modal-body">
-                <p><label for="username">Username:</label></p>
-                <p><input type="text" id="username" value=""></p>
-                <p><label for="password">Password:</label></p>
-                <p><input type="password" id="password" value=""></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" id="submitButton" class="">Submit</button>
+                <button type="button" id="login" data-toggle="modal" data-target="#modal">
+                    Login
+                </button>
+            {% endif %}
+        </nav>
+        <main id="full-content"></main>
+        <footer>
+            <p>© Copyright - Backend Boys</p>
+        </footer>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-title"
+             aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modal-title"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span id="close-x" aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div id="modal-body" class="modal-body">
+                        <p><label for="username">Username:</label></p>
+                        <p><input type="text" id="username" value="" minlength="5" maxlength="25"></p>
+                        <p><label for="password">Password:</label></p>
+                        <p><input type="password" id="password" value="" minlength="5" maxlength="25"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="submitButton" class="">Submit</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-</body>
+    </body>
 </html>

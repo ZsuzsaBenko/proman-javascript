@@ -132,3 +132,10 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+.idea/dataSources/
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/proman-javascript.iml
+

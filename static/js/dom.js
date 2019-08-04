@@ -2,21 +2,22 @@ import {templates} from "./templates.js";
 import {dataHandler} from "./data_handler.js";
 
 export let dom = {
-    showBoards: function (boards) {
+    showBoards: function(boards) {
         for (let board of boards) {
-            templates.createBoardElement(board.title, board.statuses, board.id, board.username, board.user_id);
-            dom.showCards(board, board.user_id);
+            templates.createBoardElement(board.title, board.statuses, board.id, board.username, board["user_id"]);
+            dom.showCards(board);
         }
     },
-    showCards: function (board, userId) {
+    showCards: function(board) {
         let cards = board.cards;
+        let state = localStorage.getItem("state");
         for (let i = 0; i < cards.length; i++) {
             let column = dom.addCard(board, cards[i]);
-            let cardElement = templates.createCardElement(cards[i].title, cards[i].id, cards[i].order_num, userId);
+            let cardElement = templates.createCardElement(cards[i].title, cards[i].id, cards[i].order_num, state);
             column.appendChild(cardElement);
         }
     },
-    addCard: function (board, card) {
+    addCard: function(board, card) {
         let column;
         if (card.status_id === 1) {
             column = document.querySelector(`.board[data-board-id='${board.id}'] .cards > :first-child`);
@@ -32,7 +33,7 @@ export let dom = {
         }
         return column
     },
-    toggleBoard: function (event) {
+    toggleBoard: function(event) {
         if (event.target.className !== 'new-card-button' && event.target.className !== 'board-title' &&
             event.target.className !== 'delete-board-button') {
             let boardHeader;
@@ -80,14 +81,14 @@ export let dom = {
         const username = document.querySelector('#username');
         const password = document.querySelector('#password');
         const submitButton = document.querySelector('#submitButton');
-        regButton.addEventListener('click', function (event) {
+        regButton.addEventListener('click', function(event) {
             dom.giveAutofocus();
             modalTitle.innerHTML = "Registration";
             submitButton.dataset.status = 'registration';
             username.value = "";
             password.value = "";
         });
-        logButton.addEventListener('click', function (event) {
+        logButton.addEventListener('click', function(event) {
             dom.giveAutofocus();
             modalTitle.innerHTML = "Login";
             submitButton.dataset.status = 'login';

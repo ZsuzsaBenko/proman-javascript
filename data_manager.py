@@ -164,3 +164,24 @@ def get_user_id(cursor, username):
         """, {'username': username})
     user_id = cursor.fetchone()
     return user_id['id']
+
+
+@connection_handler
+def get_user_id_for_board(cursor, board_id):
+    cursor.execute("""
+        SELECT user_id FROM boards
+        WHERE id = %(board_id)s;
+    """, {"board_id": board_id})
+    user_id = cursor.fetchone()
+    return user_id['user_id']
+
+
+@connection_handler
+def get_user_id_from_card_id(cursor, card_id):
+    cursor.execute("""
+        SELECT boards.user_id FROM boards
+        JOIN cards ON boards.id = cards.board_id
+        WHERE cards.id = %(card_id)s;
+    """, {"card_id": card_id})
+    user_id = cursor.fetchone()
+    return user_id['user_id']
